@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 /**
  * Add Base URL
  */
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:81/api/v1";
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 // const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://192.168.1.6:81/api/v1";
 
