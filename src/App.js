@@ -136,7 +136,16 @@ import PostJob from './Pages/PrivatePages/Employer/PostJobs/PostJob';
 import ViewApplications from './Pages/PrivatePages/Employer/Applications/Applications/ViewApplications';
 import ViewApplicants from './Pages/PrivatePages/Employer/Applications/Applicants/ViewApplicants';
 
-// HANDLE ALL THE ROUTING HERE  
+
+
+function App() {
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.loader.isLoading);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const [role,setRole] = useState(useSelector((state) => state?.user?.user?.role));
+
+
+  // HANDLE ALL THE ROUTING HERE  
 const commonRoutes = [
   { path: '', element: <LandingPage /> },
   { path: 'about-us', element: <AboutUs /> },
@@ -151,9 +160,9 @@ const commonRoutes = [
 ];
 
 const publicRoutes = [
-  { path: '/login', element: <Login /> },
+  { path: '/login', element: <Login setRole={setRole}/> },
   { path: '/signup', element: <SignUp /> },
-];
+]; 
 
 const privateRoutes =  {
   // Candidate Route
@@ -171,12 +180,6 @@ const privateRoutes =  {
     // { path: '/employer/viewapplicants/:id', element: <ViewApplicant/> },
   ],
 };
-
-function App() {
-  const dispatch = useDispatch();
-  const loading = useSelector((state) => state.loader.isLoading);
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const [role,setRole] = useState(useSelector((state) => state?.user?.user?.role));
 
   useEffect(() => {
     const checkToken = async () => {
@@ -200,7 +203,7 @@ function App() {
         dispatch(setLoading(false));
       }
     }
-    
+
     checkToken();
   }, [dispatch]);
 

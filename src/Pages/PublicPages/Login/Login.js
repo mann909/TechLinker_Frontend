@@ -2,7 +2,7 @@ import React from 'react';
 import useLogin from './useLogin';
 import { UserPlus, Eye, EyeOff,UserCircle } from 'lucide-react';
 
-const Login = () => {
+const Login = (setRole) => {
     const {
         accountTypes,
         formData,
@@ -13,7 +13,7 @@ const Login = () => {
         handleSubmit,
         navigateToSignup,
         inputElements,
-    } = useLogin();
+    } = useLogin(setRole);
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 to-white p-4 sm:p-6 lg:p-8">

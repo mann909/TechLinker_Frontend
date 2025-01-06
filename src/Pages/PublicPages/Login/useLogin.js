@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 import { setIsLoggedIn, setUser } from '../../../Store/user.slice';
 
-const useLogin = () => {
+const useLogin = (setRole) => {
     const accountTypes = ['Candidate', 'Employer', 'University'];
     const inputElements = [
         { label: 'Email', type: 'email', name: 'email', placeholder: 'Enter your email' },
@@ -46,6 +46,7 @@ const useLogin = () => {
             })
             dispatch(setIsLoggedIn(true))
             dispatch(setUser(response.response))
+            setRole(response?.response?.role)
             console.log("Response after signing in : ",response);
             toast.success("Logged in successfully.");
             navigate('/');
