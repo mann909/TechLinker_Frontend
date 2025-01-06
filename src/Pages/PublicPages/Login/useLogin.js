@@ -46,7 +46,8 @@ const useLogin = (setRole) => {
             })
             dispatch(setIsLoggedIn(true))
             dispatch(setUser(response.response))
-            setRole(response?.response?.role)
+            // setRole(response?.response?.role)
+            window.location.reload()
             console.log("Response after signing in : ",response);
             toast.success("Logged in successfully.");
             navigate('/');
