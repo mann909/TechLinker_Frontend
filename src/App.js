@@ -136,16 +136,7 @@ import PostJob from './Pages/PrivatePages/Employer/PostJobs/PostJob';
 import ViewApplications from './Pages/PrivatePages/Employer/Applications/Applications/ViewApplications';
 import ViewApplicants from './Pages/PrivatePages/Employer/Applications/Applicants/ViewApplicants';
 
-
-
-function App() {
-  const dispatch = useDispatch();
-  const loading = useSelector((state) => state.loader.isLoading);
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const [role,setRole] = useState(useSelector((state) => state?.user?.user?.role));
-
-
-  // HANDLE ALL THE ROUTING HERE  
+// HANDLE ALL THE ROUTING HERE  
 const commonRoutes = [
   { path: '', element: <LandingPage /> },
   { path: 'about-us', element: <AboutUs /> },
@@ -160,9 +151,9 @@ const commonRoutes = [
 ];
 
 const publicRoutes = [
-  { path: '/login', element: <Login setRole={setRole}/> },
+  { path: '/login', element: <Login /> },
   { path: '/signup', element: <SignUp /> },
-]; 
+];
 
 const privateRoutes =  {
   // Candidate Route
@@ -181,6 +172,13 @@ const privateRoutes =  {
   ],
 };
 
+function App() {
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.loader.isLoading);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const role = useSelector((state) => state?.user?.user?.role);
+  console.log("Role in app.js : ",role)
+
   useEffect(() => {
     const checkToken = async () => {
       dispatch(setLoading(true));
@@ -192,18 +190,16 @@ const privateRoutes =  {
 
         dispatch(setIsLoggedIn(true));
         dispatch(setUser(response.response));
-        setRole(response?.response?.role?.toLowerCase());
         console.log("TOKEN VERIFIED ", response);
       } catch (e) {
         dispatch(setIsLoggedIn(false));
-        dispatch(setUser(null));
         console.log("TOKEN ARE NOT VERIFIED ");
         console.log("Error while Checking token", e);
       } finally {
         dispatch(setLoading(false));
       }
     }
-
+    
     checkToken();
   }, [dispatch]);
 
@@ -222,7 +218,7 @@ const privateRoutes =  {
           ))}
 
           {/* Strictly Private Routes */}
-          {isLoggedIn && privateRoutes[role].map((route, index) => (
+          {isLoggedIn && privateRoutes[role.toLowerCase()].map((route, index) => (
           <Route key={index} path={route.path} element={route.element} />
         ))}
         </Route>

@@ -18,6 +18,8 @@ const Header = () => {
     const isLoggedIn = userMain?.isLoggedIn || false
     const user = userMain?.user
 
+    // console.log("USER IN REDu")
+
 
   const links = [
     { name: 'Home', path: '/' },

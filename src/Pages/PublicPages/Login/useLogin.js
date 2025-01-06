@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 import { setIsLoggedIn, setUser } from '../../../Store/user.slice';
 
-const useLogin = (setRole) => {
+const useLogin = () => {
     const accountTypes = ['Candidate', 'Employer', 'University'];
     const inputElements = [
         { label: 'Email', type: 'email', name: 'email', placeholder: 'Enter your email' },
@@ -50,7 +50,7 @@ const useLogin = (setRole) => {
             console.log("Response after signing in : ",response);
             toast.success("Logged in successfully.");
             navigate('/');
-            window.location.reload()
+            // window.location.reload()
         }catch(error){
             console.log("Error while signing in : ",error);
             toast.error(error?.response?.data?.message);

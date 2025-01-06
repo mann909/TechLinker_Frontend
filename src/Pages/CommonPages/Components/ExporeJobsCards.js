@@ -38,22 +38,12 @@ const ExporeJobsCards = () => {
       if (role.toUpperCase()===card.title.toUpperCase()){
         navigate(card.link)
       }else{
-        toast(`Please login as ${card.title} first!`, {
-          style: {
-            background: 'red',
-            color: 'white'
-          }
-        })
+        toast.error(`Kindly Login as ${card.title} !`)
         navigate('/signup')
       }
     }else{
       console.log("role Not found in job cards")
-      toast(`Please Login as ${card.title} first!`, {
-        style: {
-          background: 'red',
-          color: 'white'
-        }
-      })
+      toast.error(`Kindly Login as ${card.title} !`)
       navigate('/signup')
     }
   }
