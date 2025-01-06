@@ -33,7 +33,7 @@ const BackgroundTab = () => {
             {/* Buttons Container */}
             <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto">
               <Link 
-                to="/find-jobs"
+                to="/jobs"
                 className="group flex items-center justify-center bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
               >
                 Find Jobs

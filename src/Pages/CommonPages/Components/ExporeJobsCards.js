@@ -1,25 +1,30 @@
 import React from 'react';
 import { Building2, Users, GraduationCap } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-const JobCards = () => {
+const ExporeJobsCards = () => {
+  const navigate = useNavigate()
   const cards = [
     {
       title: "EMPLOYERS",
       icon: <Building2 className="w-12 h-12 text-orange-500" />,
       description: "FIND THE PERFECT MATCH FOR YOUR TEAM WITH TECHLINKER.",
-      buttonText: "Sign Up"
+      buttonText: "Post Jobs",
+      link:"/employer/postjobs"
     },
     {
       title: "CANDIDATES",
       icon: <Users className="w-12 h-12 text-orange-500" />,
       description: "BROWSE A RANGE OF JOB POSTINGS THAT MATCH YOUR SKILLS.",
-      buttonText: "Register"
+      buttonText: "Find Jobs",
+      link:"/candidate/findjobs"
     },
     {
       title: "UNIVERSITY & INSTITUTES",
       icon: <GraduationCap className="w-12 h-12 text-orange-500" />,
       description: "FIND THE PERFECT MATCH FOR YOUR ORGANIZATIONS.",
-      buttonText: "Registration"
+      buttonText: "Registration",
+      link:"/university/explore"
     }
   ];
 
@@ -43,7 +48,9 @@ const JobCards = () => {
               {card.description}
             </p>
             
-            <button className="bg-orange-400 text-white px-6 py-2 rounded-md hover:bg-orange-500 transition-colors duration-300 transform hover:scale-110">
+            <button 
+            onClick={()=>navigate(card.link)}
+            className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-500 transition-colors duration-300 transform hover:scale-110">
               {card.buttonText}
             </button>
           </div>
@@ -53,4 +60,4 @@ const JobCards = () => {
   );
 };
 
-export default JobCards;
+export default ExporeJobsCards;

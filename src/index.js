@@ -5,11 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import AppStore from '../src/Store/AppStore';
+import { Toaster } from 'react-hot-toast';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  
   <Provider store={AppStore}>
+    <Toaster position='top-right' />
     <App />
   </Provider>
 );
