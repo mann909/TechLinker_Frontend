@@ -7,7 +7,7 @@ const userSlice = createSlice({
         user:{
             name: null,
             email: null,
-            role: null,
+            role: '',
             profile:null,
         }
         

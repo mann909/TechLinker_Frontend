@@ -1,32 +1,62 @@
 import React from 'react';
 import { Building2, Users, GraduationCap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
 
 const ExporeJobsCards = () => {
+  const role = useSelector((state) => state?.user?.user?.role)
   const navigate = useNavigate()
+
   const cards = [
     {
-      title: "EMPLOYERS",
+      title: "Employer",
       icon: <Building2 className="w-12 h-12 text-orange-500" />,
-      description: "FIND THE PERFECT MATCH FOR YOUR TEAM WITH TECHLINKER.",
+      description: "Find The Perfect Match For Your Team With Techlinker.",
       buttonText: "Post Jobs",
       link:"/employer/postjobs"
     },
     {
-      title: "CANDIDATES",
+      title: "Candidate",
       icon: <Users className="w-12 h-12 text-orange-500" />,
-      description: "BROWSE A RANGE OF JOB POSTINGS THAT MATCH YOUR SKILLS.",
+      description: "Browse A Range Of Job Postings That Match Your Skills.",
       buttonText: "Find Jobs",
       link:"/candidate/findjobs"
     },
     {
-      title: "UNIVERSITY & INSTITUTES",
+      title: "University & Institute",
       icon: <GraduationCap className="w-12 h-12 text-orange-500" />,
-      description: "FIND THE PERFECT MATCH FOR YOUR ORGANIZATIONS.",
+      description: "Find The Perfect Match For Your Organizations.",
       buttonText: "Registration",
       link:"/university/explore"
     }
   ];
+
+  const handleClick = (card)=>{
+    if (role){
+      console.log("role found in job cards")
+      if (role.toUpperCase()===card.title.toUpperCase()){
+        navigate(card.link)
+      }else{
+        toast(`Please login as ${card.title} first!`, {
+          style: {
+            background: 'red',
+            color: 'white'
+          }
+        })
+        navigate('/signup')
+      }
+    }else{
+      console.log("role Not found in job cards")
+      toast(`Please Login as ${card.title} first!`, {
+        style: {
+          background: 'red',
+          color: 'white'
+        }
+      })
+      navigate('/signup')
+    }
+  }
 
   return (
     <div className="w-full max-w-7xl mx-auto p-4 mt-20">
@@ -49,7 +79,7 @@ const ExporeJobsCards = () => {
             </p>
             
             <button 
-            onClick={()=>navigate(card.link)}
+            onClick={()=>handleClick(card)}
             className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-500 transition-colors duration-300 transform hover:scale-110">
               {card.buttonText}
             </button>

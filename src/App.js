@@ -176,7 +176,7 @@ function App() {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loader.isLoading);
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const [role,setRole] = useState('candidate');
+  const [role,setRole] = useState(useSelector((state) => state?.user?.user?.role));
 
   useEffect(() => {
     const checkToken = async () => {
@@ -189,7 +189,7 @@ function App() {
 
         dispatch(setIsLoggedIn(true));
         dispatch(setUser(response.response));
-        setRole(response.response.role);
+        setRole(response?.response?.role?.toLowerCase());
         console.log("TOKEN VERIFIED ", response);
       } catch (e) {
         dispatch(setIsLoggedIn(false));
@@ -218,7 +218,7 @@ function App() {
           ))}
 
           {/* Strictly Private Routes */}
-          {isLoggedIn && privateRoutes[role.toLowerCase()].map((route, index) => (
+          {isLoggedIn && privateRoutes[role].map((route, index) => (
           <Route key={index} path={route.path} element={route.element} />
         ))}
         </Route>
