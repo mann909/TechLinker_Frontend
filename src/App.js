@@ -200,6 +200,7 @@ function App() {
         dispatch(setLoading(false));
       }
     }
+    
     checkToken();
   }, [dispatch]);
 
