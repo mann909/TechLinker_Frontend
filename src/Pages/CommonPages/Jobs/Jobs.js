@@ -1,14 +1,14 @@
 import React from 'react';
 import GradientBanner from '../../../Components/GradientBanner';
-import JobCards from '../Components/JobCards';
+import ExporeJobsCards from '../Components/ExporeJobsCards';
 
-const FindJobs = () => {
+const Jobs = () => {
     return (
         <div>
             <GradientBanner title={'Find Jobs'}/>
-            <JobCards/>
+            <ExporeJobsCards/>
         </div>
     );
 };
 
-export default FindJobs;
+export default Jobs;

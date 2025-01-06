@@ -1,5 +1,5 @@
 import React from 'react';
-import JobCards from './Components/JobCards';
+import JobCards from './Components/ExporeJobsCards';
 import PopularJobCategories from './Components/PopularJobCategories';
 import OurServices from './Components/OurServices';
 import UniqueAdvantage from './Components/UniqueAdvantage';

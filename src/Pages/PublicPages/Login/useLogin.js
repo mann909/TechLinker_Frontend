@@ -1,5 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ApiService from '../../../ApiServices/ApiService';
+import { apiPaths } from '../../../ApiServices/ApiPaths';
+import { setLoading } from '../../../Store/loader.slice';
+import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
+import { setIsLoggedIn, setUser } from '../../../Store/user.slice';
 
 const useLogin = () => {
     const accountTypes = ['Candidate', 'Employer', 'University'];
@@ -15,6 +21,8 @@ const useLogin = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
+    const dispatch = useDispatch()
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,10 +32,30 @@ const useLogin = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Add your login logic here
-        // If there's an error, set it using setError
+        console.log("Form Data on logging in : ",formData)
+        try{
+            const accountType = formData.accountType.toLowerCase()
+
+            dispatch(setLoading(true));
+            const response = await ApiService({
+                method: "POST",
+                endpoint: apiPaths[accountType].login,
+                data: formData,
+            })
+            dispatch(setIsLoggedIn(true))
+            dispatch(setUser(response.response))
+            console.log("Response after signing in : ",response);
+            toast.success("Logged in successfully.");
+            navigate('/');
+        }catch(error){
+            console.log("Error while signing in : ",error);
+            toast.error(error?.response?.data?.message);
+        }finally{
+            dispatch(setLoading(false));
+        }
+
     };
 
     const navigateToSignup = () => {
