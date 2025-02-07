@@ -196,7 +196,7 @@ function App() {
         console.log("TOKEN ARE NOT VERIFIED ");
         console.log("Error while Checking token", e);
       } finally {
-        dispatch(setLoading(false));
+        // dispatch(setLoading(false));
       }
     }
     
@@ -204,7 +204,11 @@ function App() {
   }, [dispatch]);
 
   if (loading) {
-    return <div className='flex justify-center items-center h-[100vh] text-2xl'>Loading...</div>
+    return (
+    <div className='flex justify-center items-center h-[100vh] text-2xl'>
+      <img className='w-52 h-52 ' src='https://res.cloudinary.com/dagd6qt6p/image/upload/v1735032761/techlogo_tjqy5g.png'/>
+    </div>
+    )
   }
 
   return (
